@@ -7,38 +7,16 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Choose platform: pc, playstation, xbox: ");
-        String platform = scanner.nextLine().toLowerCase();
+        String platform = scanner.nextLine();
 
         GamingPlatformFactory factory;
-        GameLauncher launcher;
 
-        if (platform.equals("pc")) {
-
-            factory = new PCPlatformFactory();
-            launcher = new PCGameLauncher();
-
-        } else if (platform.equals("playstation")) {
-
-            factory = new PlayStationPlatformFactory();
-            launcher = new PlayStationGameLauncher();
-
-        } else if (platform.equals("xbox")) {
-
-            factory = new XboxPlatformFactory();
-            launcher = new XboxGameLauncher();
-
-        } else {
-
-            System.out.println("Unknown platform.");
+        try {
+            factory = PlatformFactoryProvider.getFactory(platform);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return;
         }
-
-        System.out.println();
-        System.out.println("=== FACTORY METHOD ===");
-        launcher.launchGame();
-
-        System.out.println();
-        System.out.println("=== ABSTRACT FACTORY ===");
 
         GamingSession session = new GamingSession(factory);
 
