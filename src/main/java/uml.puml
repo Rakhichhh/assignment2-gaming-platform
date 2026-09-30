@@ -1,0 +1,163 @@
+@startuml
+
+title Cross-Platform Gaming System
+
+skinparam packageStyle rectangle
+
+package "Factory Method" {
+
+    interface Game {
+        + loadResources()
+        + initialize()
+        + start()
+    }
+
+    class PCGame
+    class PlayStationGame
+    class XboxGame
+
+    abstract class GameLauncher {
+        # createGame() : Game
+        + launchGame()
+    }
+
+    class PCGameLauncher
+    class PlayStationGameLauncher
+    class XboxGameLauncher
+
+    Game <|.. PCGame
+    Game <|.. PlayStationGame
+    Game <|.. XboxGame
+
+    GameLauncher <|-- PCGameLauncher
+    GameLauncher <|-- PlayStationGameLauncher
+    GameLauncher <|-- XboxGameLauncher
+
+    PCGameLauncher --> PCGame : creates
+    PlayStationGameLauncher --> PlayStationGame : creates
+    XboxGameLauncher --> XboxGame : creates
+}
+
+
+package "Abstract Factory" {
+
+    interface Controller {
+        + connect()
+        + readInput() : String
+        + getFamily() : String
+    }
+
+    interface Display {
+        + initialize()
+        + render(scene : String)
+        + getFamily() : String
+    }
+
+    interface AudioSystem {
+        + initialize()
+        + playSound(sound : String)
+        + getFamily() : String
+    }
+
+    interface GamingPlatformFactory {
+        + createController() : Controller
+        + createDisplay() : Display
+        + createAudioSystem() : AudioSystem
+    }
+
+
+    class PCController
+    class PCDisplay
+    class PCAudioSystem
+
+    class PlayStationController
+    class PlayStationDisplay
+    class PlayStationAudioSystem
+
+    class XboxController
+    class XboxDisplay
+    class XboxAudioSystem
+
+    class NintendoController
+    class NintendoDisplay
+    class NintendoAudioSystem
+
+
+    class PCPlatformFactory
+    class PlayStationPlatformFactory
+    class XboxPlatformFactory
+    class NintendoPlatformFactory
+
+
+    Controller <|.. PCController
+    Controller <|.. PlayStationController
+    Controller <|.. XboxController
+    Controller <|.. NintendoController
+
+    Display <|.. PCDisplay
+    Display <|.. PlayStationDisplay
+    Display <|.. XboxDisplay
+    Display <|.. NintendoDisplay
+
+    AudioSystem <|.. PCAudioSystem
+    AudioSystem <|.. PlayStationAudioSystem
+    AudioSystem <|.. XboxAudioSystem
+    AudioSystem <|.. NintendoAudioSystem
+
+
+    GamingPlatformFactory <|.. PCPlatformFactory
+    GamingPlatformFactory <|.. PlayStationPlatformFactory
+    GamingPlatformFactory <|.. XboxPlatformFactory
+    GamingPlatformFactory <|.. NintendoPlatformFactory
+
+
+    PCPlatformFactory --> PCController : creates
+    PCPlatformFactory --> PCDisplay : creates
+    PCPlatformFactory --> PCAudioSystem : creates
+
+    PlayStationPlatformFactory --> PlayStationController : creates
+    PlayStationPlatformFactory --> PlayStationDisplay : creates
+    PlayStationPlatformFactory --> PlayStationAudioSystem : creates
+
+    XboxPlatformFactory --> XboxController : creates
+    XboxPlatformFactory --> XboxDisplay : creates
+    XboxPlatformFactory --> XboxAudioSystem : creates
+
+    NintendoPlatformFactory --> NintendoController : creates
+    NintendoPlatformFactory --> NintendoDisplay : creates
+    NintendoPlatformFactory --> NintendoAudioSystem : creates
+}
+
+
+class GamingSession {
+    - controller : Controller
+    - display : Display
+    - audioSystem : AudioSystem
+
+    + GamingSession(factory : GamingPlatformFactory)
+    + isCompatible() : boolean
+    + startSession()
+    + processPlayerAction()
+    + pauseGame()
+    + shutdownSession()
+}
+
+class PlatformFactoryProvider {
+    + getFactory(platform : String) : GamingPlatformFactory
+}
+
+class Main {
+    + main(args : String[])
+}
+
+
+GamingSession --> GamingPlatformFactory : uses
+GamingSession --> Controller
+GamingSession --> Display
+GamingSession --> AudioSystem
+
+PlatformFactoryProvider --> GamingPlatformFactory : returns
+Main --> PlatformFactoryProvider : selects factory
+Main --> GamingSession : creates
+
+@enduml
