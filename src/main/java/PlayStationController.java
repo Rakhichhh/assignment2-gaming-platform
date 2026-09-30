@@ -9,4 +9,9 @@ public class PlayStationController implements Controller {
     public String readInput() {
         return "PlayStation controller input";
     }
+
+    @Override
+    public String getFamily() {
+        return "PlayStation";
+    }
 }

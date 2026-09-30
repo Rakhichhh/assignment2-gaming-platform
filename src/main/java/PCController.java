@@ -9,4 +9,9 @@ public class PCController implements Controller {
     public String readInput() {
         return "PC keyboard/mouse input";
     }
+
+    @Override
+    public String getFamily() {
+        return "PC";
+    }
 }

@@ -9,4 +9,9 @@ public class XboxAudioSystem implements AudioSystem {
     public void playSound(String sound) {
         System.out.println("Xbox audio plays: " + sound);
     }
+
+    @Override
+    public String getFamily() {
+        return "Xbox";
+    }
 }

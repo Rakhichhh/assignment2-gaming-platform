@@ -9,4 +9,9 @@ public class PCAudioSystem implements AudioSystem {
     public void playSound(String sound) {
         System.out.println("PC audio plays: " + sound);
     }
+
+    @Override
+    public String getFamily() {
+        return "PC";
+    }
 }

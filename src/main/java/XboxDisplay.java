@@ -9,4 +9,9 @@ public class XboxDisplay implements Display {
     public void render(String scene) {
         System.out.println("Xbox display renders: " + scene);
     }
+
+    @Override
+    public String getFamily() {
+        return "Xbox";
+    }
 }

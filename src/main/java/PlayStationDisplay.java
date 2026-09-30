@@ -9,4 +9,9 @@ public class PlayStationDisplay implements Display {
     public void render(String scene) {
         System.out.println("PlayStation display renders: " + scene);
     }
+
+    @Override
+    public String getFamily() {
+        return "PlayStation";
+    }
 }

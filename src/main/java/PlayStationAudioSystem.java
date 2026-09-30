@@ -9,4 +9,9 @@ public class PlayStationAudioSystem implements AudioSystem {
     public void playSound(String sound) {
         System.out.println("PlayStation audio plays: " + sound);
     }
+
+    @Override
+    public String getFamily() {
+        return "PlayStation";
+    }
 }

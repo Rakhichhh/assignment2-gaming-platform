@@ -1,4 +1,5 @@
-    public interface Controller {
-        void connect();
-        String readInput();
-    }
+public interface Controller {
+    void connect();
+    String readInput();
+    String getFamily();
+}

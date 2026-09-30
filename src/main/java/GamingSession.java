@@ -10,8 +10,16 @@ public class GamingSession {
         this.audioSystem = factory.createAudioSystem();
     }
 
+    public boolean isCompatible() {
+        return controller.getFamily().equals(display.getFamily())
+                && controller.getFamily().equals(audioSystem.getFamily());
+    }
+
     public void startSession() {
         System.out.println("Starting gaming session...");
+
+        System.out.println("Platform family: " + controller.getFamily());
+        System.out.println("Compatible products: " + isCompatible());
 
         controller.connect();
         display.initialize();

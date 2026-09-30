@@ -9,4 +9,9 @@ public class XboxController implements Controller {
     public String readInput() {
         return "Xbox controller input";
     }
+
+    @Override
+    public String getFamily() {
+        return "Xbox";
+    }
 }
