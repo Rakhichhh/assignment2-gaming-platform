@@ -14,6 +14,12 @@ public class PlatformFactoryProvider {
             return new XboxPlatformFactory();
         }
 
-        throw new IllegalArgumentException("Unknown platform: " + platform);
+        if (platform.equalsIgnoreCase("nintendo")) {
+            return new NintendoPlatformFactory();
+        }
+
+        throw new IllegalArgumentException(
+                "Unknown platform: " + platform
+        );
     }
 }

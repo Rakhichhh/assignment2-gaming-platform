@@ -7,7 +7,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print(
-                "Choose platform: pc, playstation, xbox: "
+                "Choose platform: pc, playstation, xbox, nintendo: "
         );
 
         String platform = scanner.nextLine();
