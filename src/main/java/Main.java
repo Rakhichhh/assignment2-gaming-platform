@@ -9,22 +9,26 @@ public class Main {
         System.out.print("Choose platform: pc, playstation, xbox: ");
         String platform = scanner.nextLine().toLowerCase();
 
-        GameLauncher launcher;
+        GamingPlatformFactory factory;
 
         if (platform.equals("pc")) {
-            launcher = new PCGameLauncher();
+            factory = new PCPlatformFactory();
 
         } else if (platform.equals("playstation")) {
-            launcher = new PlayStationGameLauncher();
+            factory = new PlayStationPlatformFactory();
 
         } else if (platform.equals("xbox")) {
-            launcher = new XboxGameLauncher();
+            factory = new XboxPlatformFactory();
 
         } else {
             System.out.println("Unknown platform.");
             return;
         }
 
-        launcher.launchGame();
+        GamingSession session = new GamingSession(factory);
+
+        session.startSession();
+        session.playGame();
+        session.shutdownSession();
     }
 }
